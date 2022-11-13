@@ -25,3 +25,24 @@ sr.reveal ('.app', {delay:200})
 sr.reveal ('form input', {})
 sr.reveal ('form textarea', {})
 sr.reveal ('.app', {delay:200})
+
+//get all required elements
+
+const form = document.querySelector("form");
+statusTxt = form.querySelector(".button-area");
+
+form.onsubmit = (e)=> {
+    e.preventDefault();
+
+    let xhr = new XMLHttpRequest(); // creating new xml object
+    xhr.open("POST", "message.php", true); // sending post request to message.php file
+    xhr.onload = ()=>{
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let response = xhr.response;
+            console.log(response);
+        }
+
+    }
+    let formData = new FormData(form);
+    xhr.send(formData);
+}
